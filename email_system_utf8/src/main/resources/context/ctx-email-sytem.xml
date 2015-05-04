@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <bean id="systemVariable" class="com.go.base.SystemVariable">
+        <property name="host" value="${host}" />
+    </bean>
+
+    <bean id="userDao" class="com.go.user.dao.impl.UserDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="userService" class="com.go.user.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+        <property name="userGroupMappingService" ref="userGroupMappingService"></property>
+    </bean>
+
+    <bean id="userScoreDao" class="com.go.user.dao.impl.UserScoreDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="userScoreService" class="com.go.user.service.impl.UserScoreServiceImpl">
+        <property name="userScoreDao" ref="userScoreDao"></property>
+    </bean>
+
+    <bean id="emailGroupDao" class="com.go.email.dao.impl.EmailGroupDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="emailGroupService" class="com.go.email.service.impl.EmailGroupServiceImpl">
+        <property name="emailGroupDao" ref="emailGroupDao"></property>
+    </bean>
+
+    <bean id="emailListDao" class="com.go.email.dao.impl.EmailListDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="emailListService" class="com.go.email.service.impl.EmailListServiceImpl">
+        <property name="emailListDao" ref="emailListDao"></property>
+    </bean>
+
+    <bean id="templateDao" class="com.go.email.dao.impl.TemplateDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="templateService" class="com.go.email.service.impl.TemplateServiceImpl">
+        <property name="templateDao" ref="templateDao"></property>
+    </bean>
+
+    <bean id="emailTaskDao" class="com.go.email.dao.impl.EmailTaskDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="emailTaskService" class="com.go.email.service.impl.EmailTaskServiceImpl">
+        <property name="emailTaskDao" ref="emailTaskDao"></property>
+    </bean>
+
+    <bean id="emailConfigDao" class="com.go.email.dao.impl.EmailConfigDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="emailConfigService" class="com.go.email.service.impl.EmailConfigServiceImpl">
+        <property name="emailConfigDao" ref="emailConfigDao"></property>
+    </bean>
+
+    <bean id="importLogDao" class="com.go.email.dao.impl.ImportLogDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="importLogService" class="com.go.email.service.impl.ImportLogServiceImpl">
+        <property name="importLogDao" ref="importLogDao"></property>
+    </bean>
+
+    <bean id="emailLogDao" class="com.go.email.dao.impl.EmailLogDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="logSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="emailLogService" class="com.go.email.service.impl.EmailLogServiceImpl">
+        <property name="emailLogDao" ref="emailLogDao"></property>
+    </bean>
+
+
+    <bean id="configGroupDao" class="com.go.email.dao.impl.ConfigGroupDaoImpl">
+    <property name="sqlMapClient">
+        <ref bean="emailSqlMapClient" />
+    </property>
+</bean>
+
+    <bean id="configGroupService" class="com.go.email.service.impl.ConfigGroupServiceImpl">
+        <property name="configGroupDao" ref="configGroupDao"></property>
+        <property name="configGroupMappingService" ref="configGroupMappingService"></property>
+    </bean>
+
+    <bean id="configGroupMappingDao" class="com.go.email.dao.impl.ConfigGroupMappingDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="configGroupMappingService" class="com.go.email.service.impl.ConfigGroupMappingServiceImpl">
+        <property name="configGroupMappingDao" ref="configGroupMappingDao"></property>
+    </bean>
+
+    <bean id="userGroupMappingDao" class="com.go.email.dao.impl.UserGroupMappingDaoImpl">
+        <property name="sqlMapClient">
+            <ref bean="emailSqlMapClient" />
+        </property>
+    </bean>
+
+    <bean id="userGroupMappingService" class="com.go.email.service.impl.UserGroupMappingServiceImpl">
+        <property name="userGroupMappingDao" ref="userGroupMappingDao"></property>
+    </bean>
+
+</beans>

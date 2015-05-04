@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ImportLogDao">
+    <typeAlias alias="ImportLog" type="com.go.email.bean.ImportLog"/>
+
+    <resultMap id="ImportLogResult" class="ImportLog">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="file" column="file"/>
+        <result property="gid" column="gid"/>
+        <result property="count" column="count"/>
+        <result property="status" column="status"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+        <result property="updatedAt" javaType="date" column="updated_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="ImportLog" >
+        INSERT INTO `email_import_log` (`uid`,`file`,`gid`,`count`,`created_at`)
+        VALUE (#uid#,#file#,#gid#,#count#,now())
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT LAST_INSERT_ID() as id
+        </selectKey>
+    </insert>
+
+    <select id="selectById" parameterClass="int" resultMap="ImportLogResult">
+        <![CDATA[
+		    SELECT * FROM `email_import_log` where `id` = #id#
+		]]>
+    </select>
+
+    <update id="updateStatus" parameterClass="int">
+        <![CDATA[
+		    UPDATE `email_import_log` SET `status`=1 where `id` = #id#
+		]]>
+    </update>
+
+    <select id="selectByUidFileGid" parameterClass="map" resultMap="ImportLogResult">
+        <![CDATA[
+		    SELECT * FROM `email_import_log` where `uid` = #uid#
+		        AND `file`=#file# AND gid=#gid#
+		]]>
+    </select>
+
+</sqlMap>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ConfigGroupDao">
+    <typeAlias alias="ConfigGroup" type="com.go.email.bean.ConfigGroup"/>
+
+    <resultMap id="ConfigGroupResult" class="ConfigGroup">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+        <result property="updatedAt" javaType="date" column="updated_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="ConfigGroup">
+        INSERT INTO `email_config_group` (`name`,`created_at`)
+        VALUE (#name#,now())
+    </insert>
+
+    <select id="selectById" parameterClass="int" resultMap="ConfigGroupResult">
+        <![CDATA[
+		    SELECT * FROM `email_config_group` WHERE `id`=#id#
+		]]>
+    </select>
+
+    <update id="update" parameterClass="ConfigGroup">
+        <![CDATA[
+		    update `email_config_group` set `name` = #name# where `id` = #id#
+		]]>
+    </update>
+
+    <select id="selectCount" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `email_config_group`
+		]]>
+    </select>
+
+    <select id="selectList" parameterClass="map" resultMap="ConfigGroupResult">
+        <![CDATA[
+		    SELECT * FROM `email_config_group`
+		        ORDER BY `created_at` ASC
+		        LIMIT #startIndex#,#limit#
+		]]>
+    </select>
+
+</sqlMap>

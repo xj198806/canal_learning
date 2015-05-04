@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TemplateDao">
+    <typeAlias alias="Template" type="com.go.email.bean.Template"/>
+
+    <resultMap id="TemplateResult" class="Template">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="original" column="original"/>
+        <result property="status" column="status"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+        <result property="updatedAt" javaType="date" column="updated_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="Template">
+        INSERT INTO `email_template` (`uid`,`title`,`content`,`original`,`created_at`)
+        VALUE (#uid#,#title#,#content#,#original#,now())
+    </insert>
+
+    <delete id="deleteById" parameterClass="int">
+        <![CDATA[
+		    DELETE FROM `email_template` where `id` = #id#
+		]]>
+    </delete>
+
+    <update id="update" parameterClass="Template">
+        <![CDATA[
+		    UPDATE `email_template`
+		     SET `title`=#title#,`content`=#content# ,`original`=#original#
+		      where `id` = #id#
+		]]>
+    </update>
+
+    <select id="selectById" parameterClass="int" resultMap="TemplateResult">
+        <![CDATA[
+		    SELECT * FROM `email_template` where `id` = #id#
+		]]>
+    </select>
+
+    <select id="selectCount" parameterClass="int" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `email_template` where `uid` = #uid#
+		]]>
+    </select>
+
+    <select id="selectList" parameterClass="map" resultMap="TemplateResult">
+        <![CDATA[
+		    SELECT * FROM `email_template` where `uid` = #uid#
+		        LIMIT #startIndex#,#limit#
+		]]>
+    </select>
+
+</sqlMap>

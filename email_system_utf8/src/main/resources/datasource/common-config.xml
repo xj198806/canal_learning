@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="2" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>file:${CONFIG_DIR_PATH}/email2.jdbc.common.properties</value>
+				<value>file:${CONFIG_DIR_PATH}/email2.common.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="DS-EMAIL-SYSTEM" name="DS-CORE-SYSTEM" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${email.jdbc.url}" />
+		<property name="username" value="${email.jdbc.username}" />
+		<property name="password" value="${email.jdbc.password}" />
+		<property name="maxActive" value="${email.maxActive}" />
+		<property name="maxWait" value="${email.maxWait}" />
+		<property name="poolPreparedStatements" value="true" />
+		<!-- 批处理要求 -->
+		<property name="defaultAutoCommit" value="true" />
+		<property name="maxIdle" value="${email.maxIdle}" />
+		<property name="minIdle" value="${email.minIdle}" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="select 1 from dual" />
+		<property name="timeBetweenEvictionRunsMillis" value="${email.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${email.minEvictableIdleTimeMillis}" />
+	</bean>
+
+    <bean id="DS-EMAIL-LOG" name="DS-CORE-LOG" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${report.jdbc.url}" />
+        <property name="username" value="${report.jdbc.username}" />
+        <property name="password" value="${report.jdbc.password}" />
+        <property name="maxActive" value="${report.maxActive}" />
+        <property name="maxWait" value="${report.maxWait}" />
+        <property name="poolPreparedStatements" value="true" />
+        <!-- 批处理要求 -->
+        <property name="defaultAutoCommit" value="true" />
+        <property name="maxIdle" value="${report.maxIdle}" />
+        <property name="minIdle" value="${report.minIdle}" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testWhileIdle" value="true" />
+        <property name="validationQuery" value="select 1 from dual" />
+        <property name="timeBetweenEvictionRunsMillis" value="${report.timeBetweenEvictionRunsMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${report.minEvictableIdleTimeMillis}" />
+    </bean>
+
+
+	<!-- <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="DS-CORE-USER"/>
+    </bean> -->
+
+</beans>
+

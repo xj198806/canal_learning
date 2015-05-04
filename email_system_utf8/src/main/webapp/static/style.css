@@ -1,0 +1,178 @@
+/*
+ *Version: v1.0(2011-05-09 10:00)
+ *Author:  gaohong
+ *Recently:gaohong (2011-06-13 17:35)
+ */
+
+/* 模块 */
+.box{position:relative;border:1px solid #ddd;background-color:#FFF;}
+	.box h3{padding-left:10px;height:35px;line-height:35px;font-size:16px;color:#324f64;background:url(images/bg_repeat.png) 0 0 repeat-x;overflow:hidden;}
+	.box h3 span{display:inline-block;padding-left:25px;background:url(images/icon.png) 0 0 no-repeat;}
+	.box .item{position:absolute;right:0;top:0;padding-right:10px;height:35px;line-height:35px;color:#d35604;}
+	.box .tips{margin-top:5px;height:18px;overflow:hidden;}
+	.box .item a{}
+	.box .item .goto{margin-left:30px;color:#0657b2;}
+	.box .item .goto:hover{color:#f60;}
+
+	.box .box-main{padding:10px;overflow:hidden;zoom:1}
+
+
+.info h4{position:relative;margin-bottom:10px;height:25px;font-size:14px;line-height:25px;border-bottom:1px solid #e4e4e4;}
+	.info h4 span{position:absolute;display:inline-block;height:25px;color:#3f99af; border-bottom:2px solid #3f99af;}
+.info .info-main{}
+
+
+/*S 文字列表模块 */
+.list-txt li {overflow:hidden;height:22px;line-height:22px;}
+.list-txt-mark li{padding-left:15px;background: url(images/icon.png) 3px -70px no-repeat;}
+.list-txt-fz14 li{height:22px;font-size:14px;line-height:22px;}
+	.list-txt li a,.list-txt li a:visited{color:#333;}
+	.list-txt li a:hover{color:#0657b2;}
+		.list-txt li span{color:#0657b2}
+/*E 文字列表模块 */
+
+/*S 文字图片列表模块 */
+.list-txt-img{overflow:hidden;zoom:1;}
+.list-txt-img li{overflow:hidden;zoom:1;}
+.list-txt-img .link img{margin-bottom:5px;padding:3px;border:1px solid #f1f1f1;}
+.list-txt-img-fl .link img{float:left;margin:0 5px 0 0;}
+.list-txt-img h4{height:20px;line-height:20px;font-size:14px;font-weight:400;color:#0657b2;overflow:hidden;}
+.list-txt-img h4 strong{display:block;width:120px;height:20px;white-space:nowrap;line-height:20px;overflow:hidden;}
+.list-txt-img p{height:18px;line-height:18px;overflow:hidden;}
+.list-txt-img .link{outline:none;display:block;}
+.list-txt-img .link:hover{border:none;/*ie6 边框显示bug 修复*/}
+.list-txt-img .link:hover img{border-color:#a5c271;}
+.list-txt-img .link:hover h4{text-decoration:underline;color:#f60;}
+.list-txt-img .link:hover .describe{text-decoration:underline;color:#f60;}
+/*E 文字图片列表模块 */
+
+/*S 新闻链接模块 */
+.news{display:block;padding-bottom:20px;border-bottom:1px dashed #ddd;outline:none;overflow:hidden;}
+	.news h2{text-align:center;height:30px;font:18px/30px "黑体";overflow:hidden;}
+	.news p{text-indent:2em;height:40px;line-height:20px;overflow:hidden;}
+	.news h2, .news:visited h2{color:#EB5D09;}
+	.news p, .news:visited p{color:#666;}
+	.news:hover h2, .news:hover p{color:#0657b2;}
+	.news:hover h2,.news:hover p,.news:hover span{cursor:pointer;text-decoration:underline;}
+	.food-news{zoom:1;overflow:hidden;}
+		.food-news li{float:left;margin-right:5px;width:190px;height:24px;line-height:24px;overflow:hidden;}
+/*E 新闻链接模块 */
+
+.wrap{min-width:980px;_zoom:1;}
+.wrap-outer {background:#fff 50% 0 no-repeat;_zoom:1;}
+
+/*S header*/
+#logo {padding:16px 0 14px 0;height:70px;overflow:hidden;}
+#logo a {display:inline-block;overflow:hidden;}
+#logo img {_filter:Alpha(opacity=0);}
+#header-nav {padding-left:10px;font:18px/40px "Microsoft YaHei",黑体;overflow:hidden;_zoom:1;}
+	#header-nav h2, #header-nav span {float:left;font-weight: 400;}
+	#header-nav a, #header-nav em {display:inline-block;padding:0 10px;height:40px;white-space:nowrap;}
+	#header-nav em {color:#FFF;}
+	#header-nav a, #header-nav a:visited {color:#FFF;}
+	#header-nav a:hover {color:#FFEE9D;text-decoration:none;}
+/*E header*/
+
+/*S content*/
+/*S first*/
+#first{margin-bottom:10px;}
+#first .slide-player-wrap{width:320px;height:190px;overflow:hidden;}
+#first .main{margin-left:10px;padding:10px;width:391px;height:170px;background:#FFF url(images/bg_main.png) 0 0 no-repeat;overflow:hidden;}
+#first .main a.news{}
+#first .community{width:228px;height:188px;border:1px solid #d9e6bb;}
+.community .box-main{padding-top:0;}
+.community h3{font-size:14px;color:#666;background-position:0 -50px;}
+.community h3 span{background-position:0 5px;}
+.community .list-txt-img h4{margin-bottom:10px;}
+/*E first*/
+
+/*S forum-daren*/
+.forum-daren{margin-bottom:10px;}
+.forum-daren h3{background-position:0 -100px;}
+	.forum-daren h3 span{padding-left:35px;background-position:-3px -37px;}
+	.forum-daren .tips{margin-left:10px;}
+	.forum-daren .list-txt-img-wrap{width:620px;height:130px;border-right:1px dotted #ababab;overflow:hidden;}
+		.forum-daren .list-txt-img-special{float:left;margin-right:15px;width:260px;height:130px;}
+		.forum-daren .list-txt-img-special .describe{height:48px;line-height:16px;overflow:hidden;}
+		.forum-daren .list-txt-img-normal{width:340px;height:130px;overflow:hidden;}
+		.forum-daren .list-txt-img-normal li{float:left;margin:0 10px 10px 0;width:160px;height:60px;overflow:hidden;}
+		.forum-daren .list-txt-img-normal h4{height:16px;line-height:16px;font-size:12px;}
+		.forum-daren .list-txt-info{width:325px;height:130px;overflow:hidden;}
+		.forum-daren .list-txt-info li{height:22px;line-height:22px;}
+/*E forum-daren*/
+
+/*=S friendlink*/
+.friendlink h3 span{background-position:-2px -118px;}
+.friendlink-list li{float:left;margin-right:10px;width:100px;height:20px;overflow:hidden;}
+/*=E friendlink*/
+/*E content*/
+/*S 中间广告*/
+.ad-center{width:980px;height:60px;overflow:hidden;}
+.ad-center a{*display:inline;display:block;float:left;margin-left:5px;_margin-left:4px;}
+/*E 中间广告*/
+
+/*=S 个性化二级楼导航 hover */
+
+/* 默认效果 */
+#header-nav a,#header-nav a:visited{color:#fff;}
+#header-nav a:hover,#header-nav em{color:#ffee9d;}
+
+/* 02 旅游休闲 */
+.wrap-tour #header-nav a:hover,.wrap-tour #header-nav em{color:#e6de47;}
+
+/* 03 拉风汽车 */
+.wrap-auto #header-nav a:hover,.wrap-auto #header-nav em{color:#f6e33f;}
+
+/* 04 咖啡教室 */
+.wrap-fashion #header-nav a:hover,.wrap-fashion #header-nav em{color:#f6e33f;}
+
+/* 07 亲子乐园*/
+.wrap-baby #header-nav{font-size:16px;}
+
+/* 11 通信数码*/
+.wrap-digi #header-nav a,.wrap-digi #header-nav a:visited{color:#26aad4;}
+.wrap-digi #header-nav a:hover,.wrap-digi #header-nav em{color:#666;}
+
+/* 12 教育*/
+.wrap-edu #header-nav a:hover,.wrap-edu #header-nav em{color:#f9ffc7;}
+
+/* 13 求职*/
+.wrap-edu #header-nav a:hover,.wrap-edu #header-nav em{color:#fde500;}
+
+/* 15 体育运动*/
+.wrap-sport #header-nav a:hover,.wrap-sport #header-nav em{color:#e9d260;}
+
+/* 16 BB大卖场*/
+.wrap-bb #header-nav a:hover,.wrap-bb #header-nav em{color:#f9db5f;}
+
+/* 17 动漫创意*/
+.wrap-design #header-nav a,.wrap-design #header-nav a:visited{color:#333;}
+.wrap-design #header-nav a:hover,.wrap-design #header-nav em{color:#df4400;}
+
+/* 18 摄影天堂*/
+.wrap-photo #header-nav a,.wrap-photo #header-nav a:visited{color:#def2b8;}
+.wrap-photo #header-nav a:hover,.wrap-photo #header-nav em{color:#fff;}
+
+/* 19 文娱功工坊*/
+.wrap-ent #header-nav a:hover,.wrap-ent #header-nav em{color:#ffe25b;}
+
+/* 20 网友中心*/
+.wrap-club #header-nav a:hover,.wrap-club #header-nav em{color:#ffe59d;}
+
+/* 21 草根谭*/
+.wrap-fun #header-nav a:hover,.wrap-fun #header-nav em{color:#eee4a0;}
+
+/* 22 游戏*/
+.wrap-game #header-nav a:hover,.wrap-game #header-nav em{color:#ffe59d;}
+
+/* 22 大学生活*/
+.wrap-campus #header-nav a:hover,.wrap-campus #header-nav em{color:#d7cc01;}
+
+/*=E 个性化二级楼导航 hover */
+
+/* 头部透明广告 */
+#floor-header{position:relative;}
+	.head-flow-adv{position:absolute;left:300px;top:0;z-index:8;width:100px;height:100px;}
+
+/* 二级楼导航FLASH广告位 */
+.festival-nav{position:absolute;left:0px;top:0px;width:980px;height:100px;}

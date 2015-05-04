@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						   http://www.springframework.org/schema/context
+						   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						   http://www.springframework.org/schema/mvc
+						   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+						   http://www.springframework.org/schema/aop 
+						   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="locations">
+			<list>
+			    <value>file:${CONFIG_DIR_PATH}/email2.jdbc.common.properties</value>
+			    <value>file:${CONFIG_DIR_PATH}/email2.common.properties</value>
+		  	</list>
+		</property>
+        <property name="searchSystemEnvironment">
+            <value>true</value>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders">
+            <value>true</value>
+        </property>
+        <property name="fileEncoding">
+       		<value>ISO-8859-1</value>
+     	</property>
+    </bean>
+
+    <!-- 配置SpringMVC @ResponseBody和@RequestBody注解 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <mvc:resources location="/static/" mapping="/static/**" />
+
+    <!-- Json enable -->
+    <mvc:annotation-driven/>
+
+    <!-- Activates mapping of @Controller -->
+    <context:component-scan base-package="com.go.web.controller"/>
+
+    <!-- Activates @Autowired for Controllers -->
+    <context:annotation-config/>
+    
+    <!-- interceptor config -->
+    <mvc:interceptors>
+    	
+    	<!-- controller 执行时间 -->
+    	<mvc:interceptor>
+    		<mvc:mapping path="/**"/>
+    		<bean class="com.go.web.interceptor.ExecuteTimeInterceptor"></bean>
+    	</mvc:interceptor>
+
+        <!-- 用户 数据 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/email/**"/>
+            <mvc:mapping path="/user/list.html"/>
+            <mvc:mapping path="/user/register.html"/>
+            <mvc:mapping path="/user/addScore.html"/>
+            <bean class="com.go.web.interceptor.UserInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- AOP config -->
+    
+    
+    <!-- freemarker config -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPaths">
+            <list>
+            	<value>/WEB-INF/template</value>
+            </list>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">0</prop>
+                <!--
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                -->
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    	<property name="requestContextAttribute" value="rc"></property>
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+    </bean>
+    
+    <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1073741824" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+</beans>

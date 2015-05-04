@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>500页面</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" type="text/css" href="http://img.citysbs.com/css/forum/default/common.css" />
+
+<link rel="stylesheet" type="text/css" href="http://img.citysbs.com/css/forum/default/tips.css" />
+
+<script type="text/javascript" src="http://js.citysbs.com/forum/jquery.js"></script>
+</head>
+<body>
+<div id="subHeader">
+	
+</div>
+
+<!-- tips page start -->
+<div class="layout tips">
+	<div id="tipbox">
+		<h4><em>):</em>服务器内部错误，请重试！</h4>
+		<dl>
+			<dt>您可以：</dt>
+			<dd>1、检查网址是否正确</dd>
+			<dd>2、到 <a id="homelink" href="#">首页</a> 逛逛</dd>
+		</dl>
+	</div>
+</div>
+<!-- tips page end -->
+
+<!-- footer start -->
+<div id="footer">
+</div>
+<SCRIPT LANGUAGE="javascript"	type="text/javascript">
+$(document).ready(function(){
+	var sUrl=window.location + "";
+    var homeUrl = "";
+    if(sUrl.indexOf(".com/")>1){
+	    homeUrl = sUrl.substring(0, sUrl.indexOf(".com/") + 5);
+        $("#homelink").attr("href", homeUrl);
+    }
+	<!--setInterval(function(){-->
+		<!--window.location = homeUrl;-->
+	<!--},2500);-->
+})
+</SCRIPT>
+<!-- footer end -->
+</body>
+</html>

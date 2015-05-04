@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+    <settings enhancementEnabled="true" maxTransactions="20" maxRequests="32" maxSessions="10"
+              useStatementNamespaces="true" lazyLoadingEnabled="true"/>
+
+    <sqlMap resource="ibatis/email/sqlmap/email_group.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/email_list.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/template.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/email_task.xml"/>
+
+    <sqlMap resource="ibatis/email/sqlmap/user.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/user_score.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/email_config.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/import_log.xml"/>
+
+    <sqlMap resource="ibatis/email/sqlmap/email_config_group.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/config_group_mapping.xml"/>
+    <sqlMap resource="ibatis/email/sqlmap/user_group_mapping.xml"/>
+
+    <sqlMap resource="ibatis/email/sqlmap/email_log.xml"/>
+</sqlMapConfig>

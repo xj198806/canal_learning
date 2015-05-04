@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EmailLogDao">
+
+    <resultMap id="TaskLogResult" class="com.go.base.TaskLog">
+        <result property="open" column="open"/>
+        <result property="click" column="click"/>
+    </resultMap>
+
+    <resultMap id="TaskLogResult2" class="com.go.base.TaskLog">
+        <result property="status" column="status"/>
+        <result property="open" column="open"/>
+        <result property="click" column="click"/>
+    </resultMap>
+
+    <update id="updatePv" parameterClass="map">
+        <![CDATA[
+		    update `reportLog` set `Pv` = `Pv` + 1 where `TaskId` = #tid# and `MailId` = #mid#
+		]]>
+    </update>
+
+    <update id="updateUv" parameterClass="map">
+        <![CDATA[
+		    update `reportLog` set `Uv` = `Uv` + 1 where `TaskId` = #tid# and `MailId` = #mid#
+		]]>
+    </update>
+
+    <update id="updateStatus" parameterClass="map">
+        <![CDATA[
+		    update `reportLog` set `SendStatus` = #status# where `TaskId` = #tid# and `MailId` = #mid#
+		]]>
+    </update>
+
+    <select id="selectListByGid" parameterClass="int" resultMap="TaskLogResult2">
+        <![CDATA[
+		    SELECT `SendStatus` as status, Pv as open,Uv as click FROM `reportLog` where `TaskId` = #tid#
+		]]>
+    </select>
+
+    <select id="selectCountByStatus" parameterClass="map" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `reportLog` where `TaskId` = #tid# and `SendStatus` = #status#
+		]]>
+    </select>
+
+    <select id="selectPvUvCount" parameterClass="int" resultMap="TaskLogResult">
+        <![CDATA[
+		    SELECT sum(`Pv`) as open,sum(`Uv`) as click FROM `reportLog` where `TaskId` = #tid#
+		]]>
+    </select>
+
+    <select id="selectClick2" parameterClass="int" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `reportLog` where `TaskId` = #tid# and `Uv` > 0
+		]]>
+    </select>
+
+    <select id="selectOpen2" parameterClass="int" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `reportLog` where `TaskId` = #tid# and `Pv` > 0
+		]]>
+    </select>
+
+
+</sqlMap>

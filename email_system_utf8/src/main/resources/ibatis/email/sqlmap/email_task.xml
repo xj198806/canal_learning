@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EmailTaskDao">
+    <typeAlias alias="EmailTask" type="com.go.email.bean.EmailTask"/>
+
+    <resultMap id="EmailTaskResult" class="EmailTask">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sendName" column="send_name"/>
+        <result property="sendEmail" column="send_email"/>
+        <result property="replyEmail" column="reply_email"/>
+        <result property="uid" column="uid"/>
+        <result property="gid" column="gid"/>
+        <result property="tplId" column="tpl_id"/>
+        <result property="subject" column="subject"/>
+        <result property="sendDate" javaType="date" column="send_date" jdbcType="timestamp"/>
+        <result property="status" column="status"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+        <result property="updatedAt" javaType="date" column="updated_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="EmailTask">
+        INSERT INTO `email_task` (`uid`,`name`,`subject`,`gid`,`tpl_id`,`send_date`,
+            `send_name`,`send_email`,`reply_email`,`created_at`)
+        VALUE (#uid#,#name#,#subject#,#gid#,#tplId#,#sendDate#,
+                #sendName#,#sendEmail#,#replyEmail#,now())
+    </insert>
+
+    <delete id="delete" parameterClass="int">
+        <![CDATA[
+		    DELETE FROM `email_task` where `id` = #id#
+		]]>
+    </delete>
+
+    <select id="selectById" parameterClass="int" resultMap="EmailTaskResult">
+        <![CDATA[
+		    SELECT * FROM `email_task` where `id` = #id#
+		]]>
+    </select>
+
+    <select id="selectCount" parameterClass="map" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `email_task` where `uid` = #uid#
+		]]>
+        <isNotEqual prepend="AND" property="status" compareValue="-1">
+            `status` = #status#
+        </isNotEqual>
+    </select>
+
+    <select id="selectList" parameterClass="map" resultMap="EmailTaskResult">
+        <![CDATA[
+		    SELECT * FROM `email_task` where `uid` = #uid#
+		]]>
+        <isNotEqual prepend="AND" property="status" compareValue="-1">
+            `status` = #status#
+        </isNotEqual>
+        LIMIT #startIndex#,#limit#
+    </select>
+
+</sqlMap>

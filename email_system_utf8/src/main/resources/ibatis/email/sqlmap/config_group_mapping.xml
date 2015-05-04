@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ConfigGroupMappingDao">
+    <typeAlias alias="ConfigGroupMapping" type="com.go.email.bean.ConfigGroupMapping"/>
+
+    <resultMap id="ConfigGroupMappingResult" class="ConfigGroupMapping">
+        <result property="configGroupId" column="config_group_id"/>
+        <result property="configId" column="config_id"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="ConfigGroupMapping">
+        INSERT IGNORE INTO `email_config_group_mapping` (`config_group_id`,`config_id`,`created_at`)
+        VALUE (#configGroupId#,#configId#,now())
+    </insert>
+
+    <delete id="delete" parameterClass="ConfigGroupMapping">
+        DELETE FROM `email_config_group_mapping` WHERE
+            `config_group_id` = #configGroupId# AND `config_id`=#configId#
+    </delete>
+
+    <delete id="deleteByGid" parameterClass="int">
+        <![CDATA[
+		    delete from `email_config_group_mapping` where `config_group_id` = #gid#
+		]]>
+    </delete>
+
+    <select id="selectConfigIdsByGid" parameterClass="int" resultClass="int">
+        <![CDATA[
+		    SELECT `config_id` FROM `email_config_group_mapping`
+		        WHERE `config_group_id`=#gid#
+		]]>
+    </select>
+
+</sqlMap>

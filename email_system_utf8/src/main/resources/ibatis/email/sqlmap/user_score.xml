@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="UserScoreDao">
+    <typeAlias alias="UserScore" type="com.go.user.bean.UserScore"/>
+
+    <resultMap id="UserScoreResult" class="UserScore">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="score" column="score"/>
+        <result property="scoreChange" column="score_change"/>
+        <result property="action" column="action"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+        <result property="updatedAt" javaType="date" column="updated_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="UserScore">
+        INSERT INTO `user_score` (`uid`,`score`,`score_change`,`action`,`created_at`)
+        VALUE (#uid#,#score#,#scoreChange#,#action#,now())
+    </insert>
+
+</sqlMap>

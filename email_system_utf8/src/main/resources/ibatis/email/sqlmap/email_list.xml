@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EmailListDao">
+    <typeAlias alias="EmailList" type="com.go.email.bean.EmailList"/>
+
+    <resultMap id="EmailListResult" class="EmailList">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="gid" column="gid"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+        <result property="updatedAt" javaType="date" column="updated_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="EmailList">
+        INSERT IGNORE INTO `email_List` (`uid`,`email`,`name`,`gid`,`created_at`)
+        VALUE (#uid#,#email#,#name#,#gid#,now())
+    </insert>
+
+    <insert id="insertList" parameterClass="list">
+        INSERT IGNORE INTO `email_List` (`uid`,`email`,`name`,`gid`,`created_at`) VALUES
+        <iterate conjunction=",">
+        <![CDATA[
+            (#emails[].uid#, #emails[].email#,#emails[].name#, #emails[].gid# ,now())
+       ]]>
+        </iterate>
+    </insert>
+
+    <update id="updateStatus" parameterClass="map">
+        <![CDATA[
+		    UPDATE `email_List` SET `status`=#status# where `id` = #id#
+		]]>
+    </update>
+
+    <delete id="delete" parameterClass="int">
+        <![CDATA[
+		    DELETE FROM `email_List` where `id` = #id#
+		]]>
+    </delete>
+
+    <delete id="deleteByGid" parameterClass="int">
+        <![CDATA[
+		    DELETE FROM `email_List` where `gid` = #gid#
+		]]>
+    </delete>
+
+    <select id="selectById" parameterClass="int" resultMap="EmailListResult">
+        <![CDATA[
+		    SELECT * FROM `email_List` where `id` = #id#
+		]]>
+    </select>
+
+    <select id="selectEmailsByGid" parameterClass="int" resultClass="string">
+        <![CDATA[
+		    SELECT email FROM `email_List` where `gid` = #gid#
+		]]>
+    </select>
+
+    <select id="selectCount" parameterClass="int" resultClass="int">
+        <![CDATA[
+		    SELECT COUNT(*) FROM `email_List` where `gid` = #gid#
+		]]>
+    </select>
+
+    <select id="selectList" parameterClass="map" resultMap="EmailListResult">
+        <![CDATA[
+		    SELECT * FROM `email_List` where `gid` = #gid#
+		        LIMIT #startIndex#,#limit#
+		]]>
+    </select>
+
+</sqlMap>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="UserGroupMappingDao">
+    <typeAlias alias="UserConfigGroupMapping" type="com.go.email.bean.UserConfigGroupMapping"/>
+
+    <resultMap id="UserConfigGroupMappingResult" class="UserConfigGroupMapping">
+        <result property="uid" column="uid"/>
+        <result property="configGroupId" column="config_group_id"/>
+        <result property="createdAt" javaType="date" column="created_at" jdbcType="timestamp"/>
+    </resultMap>
+
+    <insert id="insert" parameterClass="UserConfigGroupMapping">
+        INSERT IGNORE INTO `user_config_group_mapping` (`uid`,`config_group_id`,`created_at`)
+        VALUE (#uid#,#configGroupId#,now())
+    </insert>
+
+    <delete id="delete" parameterClass="UserConfigGroupMapping">
+        DELETE FROM `user_config_group_mapping` WHERE
+        `config_group_id` = #configGroupId# AND `uid`=#uid#
+    </delete>
+
+    <select id="selectUserGroupsByUid" parameterClass="int" resultClass="int">
+        <![CDATA[
+		    select `config_group_id` from `user_config_group_mapping` where `uid` = #uid#
+		]]>
+    </select>
+
+    <delete id="deleteByUid" parameterClass="int">
+        <![CDATA[
+		    delete from `user_config_group_mapping` where `uid` = #uid#
+		]]>
+    </delete>
+
+</sqlMap>
